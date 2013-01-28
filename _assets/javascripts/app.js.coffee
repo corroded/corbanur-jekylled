@@ -3,9 +3,10 @@
 #= require enchantInit
 #= require_tree ./models
 #
+
 game = new Game(320, 320)
 game.preload 'assets/images/tankbrigade.png', 'assets/images/ranger_f.png'
-game.onload = ->
+game.onload = =>
   scene = new Scene()
   map = new Map(33,33)
   map.image = game.assets['assets/images/tankbrigade.png']
@@ -23,7 +24,7 @@ game.onload = ->
   map.loadData mainMap
   scene.addChild map
 
-  ranger = new Ranger()
+  ranger = new Corbanur.Units.Ranger()
 
   scene.addChild ranger
 

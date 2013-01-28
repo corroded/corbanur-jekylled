@@ -1,4 +1,4 @@
-Ranger = Class.create(Sprite,
+Corbanur.Units.Ranger = Class.create(Sprite,
 
   initialize: ->
 
