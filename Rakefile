@@ -36,6 +36,9 @@ task :deploy do
   `mkdir ~/jekylltmp`
   `cp -r _site/* ~/jekylltmp/`
 
+  # add the image assets (for some reason jekyll-assets doesn't include this automatically)
+  `cp -r _assets/images/ ~/jekylltmp/assets/`
+
   # switch to gh-pages branch
   `git checkout gh-pages`
 
