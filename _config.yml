@@ -1,3 +1,14 @@
 base_url: localhost:4000
 project_name: corbanur-jekylled
 exclude: ['*.haml', 'config.rb', 'Gemfile', 'Rakefile', 'VERSION', 'README.md']
+
+assets:
+  dirname: assets
+  baseurl: /assets/
+  sources:
+    - _assets/javascripts
+    - _assets/stylesheets
+    - _assets/images
+  compress:
+    js: uglifier
+    css: sass
