@@ -55,3 +55,14 @@ task :deploy do
   # delete the tmp folder from jekyll
   `rm -r ~/jekylltmp`
 end
+
+desc 'Compile the files and run the server locally to preview'
+task :preview do
+  Rake::Task['pre_compile'].execute
+
+  `jekyll`
+
+  `cp -r _assets/ _site/assets/`
+
+  `open _site/index.html`
+end
