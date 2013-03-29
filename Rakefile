@@ -66,3 +66,11 @@ task :preview do
 
   `open _site/index.html`
 end
+
+namespace :reload do
+  desc 'Refresh compiled coffee files'
+  task :js do
+    `jekyll`
+    `cp -r _assets/ _site/assets/`
+  end
+end
