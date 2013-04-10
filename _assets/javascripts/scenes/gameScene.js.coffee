@@ -10,7 +10,14 @@ Corbanur.Scenes.Game = Class.create(Scene,
     @VERTICAL_OFFSET = 20
     @HORIZONTAL_OFFSET = 10
 
+    #POINTER STATES
+    @PSTATE_DEFAULT = 0
+    @PSTATE_SELECTED = 1
+    @PSTATE_RELEASE = 2
+
     @game = Game.instance
+
+    @pointerState = 0
 
     @units = [[],[],[],[],[],[],[],[]]
 
@@ -39,19 +46,36 @@ Corbanur.Scenes.Game = Class.create(Scene,
 
     @units[0][0] = @ranger
 
+    @selectedUnit = undefined
+
   getRowNum: (yCoord)->
+    return 7 if yCoord >= 264
     Math.floor((yCoord-@VERTICAL_OFFSET)/@TILESIZE)
 
   getColumnNum: (xCoord) ->
+    return 7 if xCoord >= 264
     Math.floor((xCoord-@HORIZONTAL_OFFSET)/@TILESIZE)
 
   getTileCoords: (evt) ->
     yTileCoord = @getRowNum evt.y
     xTileCoord = @getColumnNum evt.x
 
-    if @units[xTileCoord][yTileCoord] != undefined
-      selectedUnit = @units[xTileCoord][yTileCoord]
-      console.log 'selected a unit'
-    else
-      console.log "NO UNIT"
+    switch @pointerState
+      when @PSTATE_DEFAULT
+        if @units[xTileCoord][yTileCoord] != undefined
+          @selectedUnit = @units[xTileCoord][yTileCoord]
+          @pointerState = @PSTATE_SELECTED
+        else
+          console.log "NO UNIT"
+
+      when @PSTATE_SELECTED
+        if @units[xTileCoord][yTileCoord] == undefined
+          @units[xTileCoord][yTileCoord] = @selectedUnit
+          @moveUnitTo @selectedUnit, xTileCoord, yTileCoord
+          @pointerState = @PSTATE_DEFAULT
+
+  moveUnitTo: (unit, xTileCoord, yTileCoord) ->
+    unit.x = xTileCoord * @TILESIZE
+    unit.y = yTileCoord * @TILESIZE
+
 )
