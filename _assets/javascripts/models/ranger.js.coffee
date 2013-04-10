@@ -1,7 +1,6 @@
 Corbanur.Units.Ranger = Class.create(Sprite,
 
   initialize: ->
-
     # Call superclass constructor
     Sprite.apply this, [32, 36]
     @image = Game.instance.assets['assets/images/ranger_f.png']
@@ -13,4 +12,5 @@ Corbanur.Units.Ranger = Class.create(Sprite,
     if @animationDuration >= 0.25
       @frame = (@frame + 1) % 3
       @animationDuration -= 0.25
+
 )
